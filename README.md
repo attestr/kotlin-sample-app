@@ -1,6 +1,6 @@
 # Attestr Kotlin Sample App
 
-![Platform](https://img.shields.io/badge/-Kotlin-brightgreen)
+![Platform](https://img.shields.io/badge/kotlin-%230095D5.svg?style=for-the-badge&logo=kotlin&logoColor=white)
 ![GitHub](https://img.shields.io/github/license/attestr/kotlin-sample-app)
 ![GitHub release (latest SemVer including pre-releases)](https://img.shields.io/github/v/release/attestr/kotlin-sample-app?include_prereleases)
 
