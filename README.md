@@ -1,6 +1,6 @@
-# Attestr Android SDK
+# Attestr Kotlin Sample App
 
-![Platform](https://img.shields.io/badge/Android-3DDC84?style=for-the-badge&logo=android&logoColor=white)
+![Platform](https://img.shields.io/badge/-Kotlin-brightgreen)
 ![GitHub](https://img.shields.io/github/license/attestr/kotlin-sample-app)
 ![GitHub release (latest SemVer including pre-releases)](https://img.shields.io/github/v/release/attestr/kotlin-sample-app?include_prereleases)
 
