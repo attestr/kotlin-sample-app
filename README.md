@@ -1,8 +1,8 @@
 # Attestr Android SDK
 
 ![Platform](https://img.shields.io/badge/Android-3DDC84?style=for-the-badge&logo=android&logoColor=white)
-![GitHub](https://img.shields.io/github/license/attestr/android-sample-app)
-![GitHub release (latest SemVer including pre-releases)](https://img.shields.io/github/v/release/attestr/android-sample-app?include_prereleases)
+![GitHub](https://img.shields.io/github/license/attestr/kotlin-sample-app)
+![GitHub release (latest SemVer including pre-releases)](https://img.shields.io/github/v/release/attestr/kotlin-sample-app?include_prereleases)
 
 ## Installation
 
@@ -30,55 +30,53 @@ implementation "com.attestr:attestr-flowx:0.2.1"
 
 Create new object of AttestrFlowx
 
-```java
-AttestrFlowx attestrFlowx = new AttestrFlowx();
+```kotlin
+  private var attestrFlowx: AttestrFlowx? = AttestrFlowx()
 ```
 
 Initialize AttestrFlowx with client_key, handshake_id & activity
 
-```java
+```kotlin
 /**
  * Initialises an instance of AttestrFlowx
  * @param cl Mandatory client key
  * @param hs Mandatory handshake key
  * @param activity Activity on which flow is to be rendered
  */
-attestrFlowx.init(clientKey, handShakeID, this);
+attestrFlowx?.init(clientKey, handShakeID, this);
 ```
 
 Launch AttestrFlowx with locale, retry and queryParameters
 
-```java
+```kotlin
 /**
  * This function launches the flow with the following specifications
  * @param lc Mandatory language code eg. 'en' for English.
  * @param retry Mandatory parameter to set retry as true if re-running the flow for a previously used handshake.
  * @param qr Optional query parameters.
  */
-attestrFlowx.launch(locale, retry, qr);
+attestrFlowx?.launch(locale, retry, qr);
 ```
 
 Implement AttestrFlowXEventListener and define success, error and skip handlers
 
-```java
+```kotlin
 // Implement AttestrFlowXEventListener 
-public class ExampleActivity implements AttestrFlowXEventListener {
+
+class MainActivity : AppCompatActivity(), AttestrFlowXListener {
 
     // Replace following with your own implementations
-    @Override
-    public void onFlowXComplete(Map<String, Object> data) {
-        Toast.makeText(MainActivity.this, "Flow completed successfully", Toast.LENGTH_SHORT).show();
+    override fun onFlowXComplete(map: Map<String?, Any>) {
+        Toast.makeText(this, "Signature: " + map["signature"], Toast.LENGTH_SHORT).show()
     }
 
-    @Override
-    public void onFlowXSkip(Map<String, Object> data) {
-        Toast.makeText(MainActivity.this, "Flow skipped", Toast.LENGTH_SHORT).show();
+    override fun onFlowXSkip(map: Map<String?, Any?>?) {
+        Toast.makeText(this, "Flow skipped", Toast.LENGTH_SHORT).show()
     }
 
-    @Override
-    public void onFlowXError(Map<String, Object> data) {
-        String errorMessage = (String) data.get("message");
-        Toast.makeText(MainActivity.this, "Error : " + errorMessage, Toast.LENGTH_SHORT).show();
+    override fun onFlowXError(map: Map<String?, Any?>) {
+        val errorMessage = map["message"] as String?
+        Toast.makeText(this, "Error : $errorMessage", Toast.LENGTH_SHORT).show()
     }
 }
 ```
