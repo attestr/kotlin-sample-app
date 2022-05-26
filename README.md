@@ -15,7 +15,6 @@ Add this dependency to your project:
  <groupId>com.attestr</groupId>
  <artifactId>attestr-flowx</artifactId>
  <version>0.6</version>
-</dependency>
 ```
 
 ### Gradle users
