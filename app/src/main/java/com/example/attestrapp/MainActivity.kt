@@ -21,7 +21,6 @@ class MainActivity : AppCompatActivity(), View.OnClickListener, AttestrFlowXList
     private val handShakeError = "Enter handshake id"
     private val clientKeyError = "Enter client key"
     private var retrySpinner: Spinner? = null;
-    private  var localeSpinner:Spinner? = null
     private var isRetry = false
     private var selectedLocale: String? = null
     private var attestrFlowx: AttestrFlowx? = null
@@ -36,7 +35,6 @@ class MainActivity : AppCompatActivity(), View.OnClickListener, AttestrFlowXList
         clientKeyEditText = mainBinding!!.clientKeyEditText
         initiateSessionButton = mainBinding!!.initiateSessionButton
         retrySpinner = mainBinding!!.retrySpinner
-        localeSpinner = mainBinding!!.localeSpinner
 
         initiateSessionButton.setOnClickListener(this)
 
@@ -44,11 +42,6 @@ class MainActivity : AppCompatActivity(), View.OnClickListener, AttestrFlowXList
             this,
             R.layout.spinner_items, resources
                 .getStringArray(R.array.retry_array)
-        )
-        val localSpinnerAdapter = ArrayAdapter(
-            this,
-            R.layout.spinner_items, resources
-                .getStringArray(R.array.locale_array)
         )
         retrySpinnerAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
         retrySpinner!!.prompt = "Select Retry"
@@ -68,23 +61,6 @@ class MainActivity : AppCompatActivity(), View.OnClickListener, AttestrFlowXList
             }
         }
 
-        localSpinnerAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
-        localeSpinner!!.prompt = "Select Locale"
-        localeSpinner!!.adapter = localSpinnerAdapter
-        localeSpinner!!.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
-            override fun onItemSelected(
-                parent: AdapterView<*>?,
-                view: View,
-                position: Int,
-                id: Long
-            ) {
-                selectedLocale = languages[position]
-            }
-
-            override fun onNothingSelected(parent: AdapterView<*>?) {
-                selectedLocale = languages[0]
-            }
-        }
         attestrFlowx = AttestrFlowx()
     }
 
@@ -96,7 +72,7 @@ class MainActivity : AppCompatActivity(), View.OnClickListener, AttestrFlowXList
                 if (!TextUtils.isEmpty(handShakeID) && !TextUtils.isEmpty(clientKey)) {
                     attestrFlowx?.init(clientKey, handShakeID, this)
                     attestrFlowx?.launch(
-                        selectedLocale,
+                        null,
                         isRetry,
                         null
                     )
